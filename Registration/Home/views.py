@@ -33,18 +33,18 @@ def user_login(request):
     if request.method == 'POST':
         email = request.POST['email']
         password = request.POST['password']
-        username = User.objects.get(email=email.lower()).username
+        username = User.objects.get(email=email).username
         user = authenticate(username=username, password=password)
         if user is not None:
             auth.login(request, user)
             user_role = Registration.objects.get(email=email).role
-            if user_role == 'Student':
+            if user_role == '1':
                 return redirect('Registration:student')
-            elif user_role == 'Staff':
+            elif user_role == '2':
                 return redirect('Registration:staff')
-            elif user_role == 'Admin':
+            elif user_role == '3':
                 return redirect('Registration:admin')
-            elif user_role == 'Editor':
+            elif user_role == '4':
                 return redirect('Registration:editor')
         else:
             messages.error(request, 'Invalid Email or Password')
@@ -57,3 +57,8 @@ def logout(request):
 
 def student(request):
     return render(request,'student.html')
+
+def admin(request):
+    return render(request,'admin.html')
+def editor(request):
+    return render(request,'editor.html')
