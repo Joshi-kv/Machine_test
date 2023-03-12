@@ -22,7 +22,8 @@
                 </div>
                 <div class="mb-3">
                     <label for="email"  class="form-label" >Email</label>
-                    <input type="email" class="form-control" name="email" placeholder="example@gmail.com" required>
+                    <input type="email" class="form-control" name="email" placeholder="example@gmail.com" required onblur="validateEmail(this)">
+
                 </div>
                 <div class="mb-3">
                     <div class="mb-3">
@@ -46,7 +47,8 @@
                 </div>
                 <div class="mb-3">
                     <label for="number"  class="form-label" >Phone Number</label>
-                    <input type="text" class="form-control" name="phone_number" placeholder="Enter your phone number" required>
+                    <input type="text" class="form-control" name="phone_number" placeholder="Enter your phone number" required onblur="validatePhoneNumber(this)">
+
                 </div>
                 <div class="mb-3">
                     <label for="password"  class="form-label" >Password</label>
@@ -60,4 +62,57 @@
         </div>
     </div>
 </div>
+<script>
+    function validateEmail(email) {
+      const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return regex.test(email);
+    }
+  
+    function validatePhoneNumber(phoneNumber) {
+      const regex = /^\d{10}$/;
+      return regex.test(phoneNumber);
+    }
+  
+    const form = document.querySelector('form');
+    const emailInput = document.querySelector('input[name="email"]');
+    const phoneNumberInput = document.querySelector('input[name="phone_number"]');
+    const submitButton = document.querySelector('button[type="submit"]');
+  
+    emailInput.addEventListener('input', () => {
+      if (validateEmail(emailInput.value)) {
+        emailInput.classList.remove('is-invalid');
+        emailInput.classList.add('is-valid');
+        submitButton.removeAttribute('disabled');
+      } else {
+        emailInput.classList.remove('is-valid');
+        emailInput.classList.add('is-invalid');
+        submitButton.setAttribute('disabled', '');
+      }
+    });
+  
+    phoneNumberInput.addEventListener('input', () => {
+      if (validatePhoneNumber(phoneNumberInput.value)) {
+        phoneNumberInput.classList.remove('is-invalid');
+        phoneNumberInput.classList.add('is-valid');
+        submitButton.removeAttribute('disabled');
+      } else {
+        phoneNumberInput.classList.remove('is-valid');
+        phoneNumberInput.classList.add('is-invalid');
+        submitButton.setAttribute('disabled', '');
+      }
+    });
+  
+    form.addEventListener('submit', (event) => {
+      if (!validateEmail(emailInput.value)) {
+        event.preventDefault();
+        emailInput.classList.add('is-invalid');
+      }
+  
+      if (!validatePhoneNumber(phoneNumberInput.value)) {
+        event.preventDefault();
+        phoneNumberInput.classList.add('is-invalid');
+      }
+    });
+  </script>
+  
 {% endblock content %}
