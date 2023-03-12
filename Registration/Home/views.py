@@ -43,7 +43,7 @@ def user_login(request):
             elif user_role == '2':
                 return redirect('Registration:staff')
             elif user_role == '3':
-                return redirect('Registration:admin')
+                return redirect('Registration:admin_view')
             elif user_role == '4':
                 return redirect('Registration:editor')
         else:
@@ -58,7 +58,11 @@ def logout(request):
 def student(request):
     return render(request,'student.html')
 
-def admin(request):
+def staff(request):
+    return render(request,'staff.html')
+
+def admin_view(request):
     return render(request,'admin.html')
+
 def editor(request):
     return render(request,'editor.html')
