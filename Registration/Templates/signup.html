@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="signup-header mt-5">
+    <h3 class="text-center">User Registration</h3>
+</div>
+<div class="container signup-form mt-5" style="margin-left:600px;" >
+    <div class="row" >
+        <div class="col-md-4">
+            <form action="" method="post">
+                {% csrf_token %}
+                {% if messages %}
+                {% for i in messages  %}
+                <div class="mb-3 mt-3" style="color:red;">
+                    {{i}}
+                </div>
+                {% endfor %}
+                {% endif %}
+                <div class="mb-3">
+                    <label for="username"  class="form-label"  >Name </label>
+                    <input type="text" class="form-control" name="username" placeholder="Enter your Full name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email"  class="form-label" >Email</label>
+                    <input type="email" class="form-control" name="email" placeholder="example@gmail.com" required>
+                </div>
+                <div class="mb-3">
+                    <div class="mb-3">
+                        <p>Select Role :</p>
+                        <select name="role" id="department" class="form-control">       
+                            <option value="0">--Select Role--</option> 
+                            <option value="1">Student</option>
+                            <option value="2">Staff</option>
+                            <option value="3">Admin</option>
+                            <option value="4">Editor</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="Country"  class="form-label" >Country</label>
+                    <input type="text" class="form-control" name="country" placeholder="Enter your country" required>
+                </div>
+                <div class="mb-3">
+                    <label for="nationality"  class="form-label" >Nationality</label>
+                    <input type="text" class="form-control" name="nationality" placeholder="Enter your nationality" required>
+                </div>
+                <div class="mb-3">
+                    <label for="number"  class="form-label" >Phone Number</label>
+                    <input type="text" class="form-control" name="phone_number" placeholder="Enter your phone number" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password"  class="form-label" >Password</label>
+                    <input type="password" class="form-control" name="password" placeholder="Enter your password" required>
+                </div>
+                <div class="mb-5 ">
+                    <a href="/login">All ready have an account</a>
+                    <button class="float-end btn btn-success" type="submit">Signup</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}
